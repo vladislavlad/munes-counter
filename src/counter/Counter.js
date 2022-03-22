@@ -1,19 +1,21 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import moment from "moment"
 
 const Counter = ({startTime}) => {
     const [amount, setAmount] = useState(0)
+    const perSecond = 0.640 // TODO
+    const perSecondQuarter = perSecond / 4.0
 
     useEffect(() => {
         if (startTime === undefined || startTime === null) {
             setAmount(0)
         } else {
-            setAmount(moment.duration(moment().diff(startTime)).asSeconds() * 0.157)
+            setAmount(moment.duration(moment().diff(startTime)).asSeconds() * perSecond)
         }
     }, [startTime])
 
     useEffect(() => {
-        const intervalId = setInterval(() => setAmount(oldValue => oldValue + 0.157), 250);
+        const intervalId = setInterval(() => setAmount(oldValue => oldValue + perSecondQuarter), 250);
         return () => clearInterval(intervalId);
     });
 
