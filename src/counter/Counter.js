@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from "react";
 import moment from "moment"
 
-const Counter = ({startTime}) => {
+const Counter = ({startTime, perSecond}) => {
     const [amount, setAmount] = useState(0)
-    const perSecond = 0.640 // TODO
     const perSecondQuarter = perSecond / 4.0
 
     useEffect(() => {

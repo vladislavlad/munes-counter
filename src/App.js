@@ -10,7 +10,7 @@ import {Button, Grid, Typography} from "@mui/material";
 function App() {
 
     const [startTime, setStartTime] = useState(moment());
-
+    // TODO perSecond field
     return (
         <div className="App">
             <header className="App-header">
@@ -19,7 +19,7 @@ function App() {
                     Today is {moment().format(`ddd DD.MM.YYYY`)}
                 </Typography>
                 <InputTime startTime={startTime} onClick={newVal => setStartTime(newVal)}/>
-                <Counter startTime={startTime}/>
+                <Counter startTime={startTime} perSecond={0.640}/>
             </header>
         </div>
     );
