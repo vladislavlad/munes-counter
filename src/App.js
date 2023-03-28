@@ -31,6 +31,7 @@ function App() {
                     setPerHour(null);
                 }}
             />
+            <br/>
             <Counter startTime={startTime} perHour={perHour}/>
         </div>
     </div>;

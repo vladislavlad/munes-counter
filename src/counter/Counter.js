@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from "react";
 import moment from "moment"
+import {Typography} from "@mui/material";
 
 const Counter = ({startTime, perHour}) => {
     const [amount, setAmount] = useState(0)
@@ -19,9 +20,7 @@ const Counter = ({startTime, perHour}) => {
         return () => clearInterval(intervalId);
     });
 
-    return (
-        <h2>You earned {amount.toFixed(2)} ₽</h2>
-    );
+    return <Typography variant="h3" component="h3">You earned {amount.toFixed(2)} ₽</Typography>;
 }
 
 export default Counter;
