@@ -1,8 +1,9 @@
 import React, {useEffect, useState} from "react";
 import moment from "moment"
 
-const Counter = ({startTime, perSecond}) => {
+const Counter = ({startTime, perHour}) => {
     const [amount, setAmount] = useState(0)
+    const perSecond = perHour / 3600.0
     const perSecondQuarter = perSecond / 4.0
 
     useEffect(() => {
@@ -11,7 +12,7 @@ const Counter = ({startTime, perSecond}) => {
         } else {
             setAmount(moment.duration(moment().diff(startTime)).asSeconds() * perSecond)
         }
-    }, [startTime])
+    }, [startTime, perSecond])
 
     useEffect(() => {
         const intervalId = setInterval(() => setAmount(oldValue => oldValue + perSecondQuarter), 250);
