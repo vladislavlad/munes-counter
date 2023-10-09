@@ -20,10 +20,8 @@ const Counter = ({startTime, perHour, currency}) => {
         return () => clearInterval(intervalId);
     });
 
-    let amountUsd = amount.toFixed(2) / 100;
-    return <div>
+    return <div className="Counter-Earned">
         <Typography variant="h3" component="h3">You earned {amount.toFixed(2)} {currency.symbol}</Typography>
-        <Typography variant="h4" component="h3">{amountUsd.toFixed(2)} $</Typography>
     </div>;
 }
 

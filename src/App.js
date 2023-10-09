@@ -4,9 +4,8 @@ import './App.css'
 import moment from "moment"
 import TextField from '@mui/material/TextField';
 import Counter from './counter/Counter.js'
-import {Button, Grid, IconButton, Typography} from "@mui/material";
+import {Button, Grid, MenuItem, Select, Typography} from "@mui/material";
 import {Currency} from "./currency/Currency";
-import SettingsIcon from '@mui/icons-material/Settings';
 
 function App() {
 
@@ -17,11 +16,8 @@ function App() {
     return <div className="App">
         <div className="App-Content">
             <header className="App-header">
-                <IconButton color='inherit' className="Settings">
-                    <SettingsIcon/>
-                </IconButton>
+                <img src={logo} className="App-logo" alt="logo_rub"/>
             </header>
-            <img src={logo} className="App-logo" alt="logo_rub"/>
             <div>
                 <Typography variant="h4" component="h3">
                     Today is {moment().format(`ddd DD.MM.YYYY`)}
@@ -41,6 +37,20 @@ function App() {
                 />
                 <br/>
                 <Counter startTime={startTime} perHour={perHour} currency={currency}/>
+                <div className="Bottom-Buttons">
+                    <Select
+                        size="small"
+                        id="change-currency"
+                        value={currency}
+                        label={"Change currency"}
+                        sx={{width: 100}}
+                        onChange={e => setCurrency(e.target.value)}
+                    >
+                        <MenuItem value={Currency.RUB}>RUB</MenuItem>
+                        <MenuItem value={Currency.USD}>USD</MenuItem>
+                        <MenuItem value={Currency.EUR}>EUR</MenuItem>
+                    </Select>
+                </div>
             </div>
         </div>
     </div>;

@@ -9,15 +9,18 @@
 
 .App-Content {
     min-height: 100vh;
-    max-width: 50%;
+    max-width: 120vh;
 }
 
 .App-header {
-    min-height: 7vh;
-    height: 7vh;
+    min-height: 20vh;
+    height: 30vh;
+    padding-top: 2.5vh;
+    padding-bottom: 2.5vh;
     display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     font-size: calc(10px + 2vmin);
     color: #4f4e4e;
 }
@@ -26,15 +29,14 @@
     color: #61dafb;
 }
 
-.Settings {
-    height: 5vh;
-    right: 2vh;
-}
-
 .App-logo {
     height: 30vh;
     width: 30vh;
     pointer-events: none;
+}
+
+.Bottom-Buttons {
+    padding-top: 1vh;
 }
 
 @media (prefers-reduced-motion: no-preference) {
