@@ -4,35 +4,44 @@ import './App.css'
 import moment from "moment"
 import TextField from '@mui/material/TextField';
 import Counter from './counter/Counter.js'
-import {Button, Grid, Typography} from "@mui/material";
+import {Button, Grid, IconButton, Typography} from "@mui/material";
+import {Currency} from "./currency/Currency";
+import SettingsIcon from '@mui/icons-material/Settings';
 
 function App() {
 
     const [startTime, setStartTime] = useState(null);
     const [perHour, setPerHour] = useState(null);
+    const [currency, setCurrency] = useState(() => Currency.USD);
 
     return <div className="App">
-        <header className="App-header">
+        <div className="App-Content">
+            <header className="App-header">
+                <IconButton color='inherit' className="Settings">
+                    <SettingsIcon/>
+                </IconButton>
+            </header>
             <img src={logo} className="App-logo" alt="logo_rub"/>
-        </header>
-        <div>
-            <Typography variant="h4" component="h3">
-                Today is {moment().format(`ddd DD.MM.YYYY`)}
-            </Typography>
-            <MainInput
-                startTime={startTime}
-                perHour={perHour}
-                onSetClick={(newStartTime, newPerHour) => {
-                    setStartTime(newStartTime);
-                    setPerHour(newPerHour);
-                }}
-                onResetClick={() => {
-                    setStartTime(null);
-                    setPerHour(null);
-                }}
-            />
-            <br/>
-            <Counter startTime={startTime} perHour={perHour}/>
+            <div>
+                <Typography variant="h4" component="h3">
+                    Today is {moment().format(`ddd DD.MM.YYYY`)}
+                </Typography>
+                <MainInput
+                    startTime={startTime}
+                    perHour={perHour}
+                    onSetClick={(newStartTime, newPerHour) => {
+                        setStartTime(newStartTime);
+                        setPerHour(newPerHour);
+                    }}
+                    onResetClick={() => {
+                        setStartTime(null);
+                        setPerHour(null);
+                    }}
+                    currency={currency}
+                />
+                <br/>
+                <Counter startTime={startTime} perHour={perHour} currency={currency}/>
+            </div>
         </div>
     </div>;
 }
@@ -64,7 +73,7 @@ function MainInput(props) {
             <Grid item xs={12}>
                 <TextField
                     id="rate"
-                    label="Your ₽ rate per hour"
+                    label={"Your " + props.currency.symbol + " rate per hour"}
                     type="number"
                     defaultValue={varPerHour}
                     InputLabelProps={{
