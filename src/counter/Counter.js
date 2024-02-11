@@ -3,6 +3,7 @@ import moment from "moment"
 import {Typography} from "@mui/material";
 
 const Counter = ({startTime, perHour, currency}) => {
+
     const [amount, setAmount] = useState(0)
     const perSecond = perHour / 3600.0
     const perSecondQuarter = perSecond / 4.0
@@ -21,7 +22,9 @@ const Counter = ({startTime, perHour, currency}) => {
     });
 
     return <div className="Counter-Earned">
-        <Typography variant="h3" component="h3">You earned {amount.toFixed(2)} {currency.symbol}</Typography>
+        <Typography variant="h4" component="h4">
+            Earned {amount.toFixed(2)} {currency.symbol}
+        </Typography>
     </div>;
 }
 

@@ -11,7 +11,7 @@ function App() {
 
     const [startTime, setStartTime] = useState(null);
     const [perHour, setPerHour] = useState(null);
-    const [currency, setCurrency] = useState(() => Currency.USD);
+    const [currency, setCurrency] = useState(() => Currency.RUB);
 
     return <div className="App">
         <div className="App-Content">
@@ -19,8 +19,11 @@ function App() {
                 <img src={logo} className="App-logo" alt="logo_rub"/>
             </header>
             <div>
-                <Typography variant="h4" component="h3">
-                    Today is {moment().format(`ddd DD.MM.YYYY`)}
+                <Typography variant="h4" component="h4">
+                    Today is
+                </Typography>
+                <Typography variant="h4" component="h4">
+                    {moment().format(`ddd DD.MM.YYYY`)}
                 </Typography>
                 <MainInput
                     startTime={startTime}
@@ -63,12 +66,12 @@ function MainInput(props) {
     if (props.startTime != null && props.perHour != null) {
         return <Grid container style={{gap: 18}}>
             <Grid item xs={12}>
-                <Typography variant="h5" component="h4">
-                    You started working at {props.startTime.format(`HH:mm`)}
+                <Typography variant="h5" component="h5">
+                    You started working in {props.startTime.format(`HH:mm`)}
                 </Typography>
             </Grid>
             <Grid item xs={12}>
-                <Button variant="outlined" onClick={() => props.onResetClick()}>
+                <Button variant="outlined" sx={{width: 300}} onClick={() => props.onResetClick()}>
                     Reset
                 </Button>
             </Grid>
@@ -89,7 +92,7 @@ function MainInput(props) {
                     InputLabelProps={{
                         shrink: true,
                     }}
-                    sx={{width: 150}}
+                    sx={{width: 300}}
                     onChange={e => {
                         setVarPerHour(Number(e.target.value));
                     }}
@@ -107,14 +110,19 @@ function MainInput(props) {
                     inputProps={{
                         step: 300,
                     }}
-                    sx={{width: 150}}
+                    sx={{width: 300}}
                     onChange={e => {
                         setVarStartTime(moment().startOf('day').add(moment.duration(e.target.value)));
                     }}
                 />
             </Grid>
             <Grid item xs={12}>
-                <Button variant="outlined" size="large" onClick={() => props.onSetClick(varStartTime, varPerHour)}>
+                <Button
+                    variant="outlined"
+                    size="large"
+                    sx={{width: 300}}
+                    onClick={() => props.onSetClick(varStartTime, varPerHour)}
+                >
                     WORK!
                 </Button>
             </Grid>
