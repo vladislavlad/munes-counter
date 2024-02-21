@@ -4,8 +4,9 @@ import './App.css'
 import moment from "moment"
 import TextField from '@mui/material/TextField';
 import Counter from './counter/Counter.js'
-import {Button, Grid, MenuItem, Select, Typography} from "@mui/material";
+import {Button, createTheme, Grid, MenuItem, Select, ThemeProvider, Typography} from "@mui/material";
 import {Currency} from "./currency/Currency";
+import {NavBar} from "./navbar/NavBar";
 
 function App() {
 
@@ -13,50 +14,51 @@ function App() {
     const [perHour, setPerHour] = useState(null);
     const [currency, setCurrency] = useState(() => Currency.RUB);
 
-    return <div className="App">
-        <div className="App-Content">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo_rub"/>
-            </header>
-            <div>
-                <Typography variant="h4" component="h4">
-                    Today is
-                </Typography>
-                <Typography variant="h4" component="h4">
-                    {moment().format(`ddd DD.MM.YYYY`)}
-                </Typography>
-                <MainInput
-                    startTime={startTime}
-                    perHour={perHour}
-                    onSetClick={(newStartTime, newPerHour) => {
-                        setStartTime(newStartTime);
-                        setPerHour(newPerHour);
-                    }}
-                    onResetClick={() => {
-                        setStartTime(null);
-                        setPerHour(null);
-                    }}
-                    currency={currency}
-                />
-                <br/>
-                <Counter startTime={startTime} perHour={perHour} currency={currency}/>
-                <div className="Bottom-Buttons">
-                    <Select
-                        size="small"
-                        id="change-currency"
-                        value={currency}
-                        label={"Change currency"}
-                        sx={{width: 100}}
-                        onChange={e => setCurrency(e.target.value)}
-                    >
-                        <MenuItem value={Currency.RUB}>RUB</MenuItem>
-                        <MenuItem value={Currency.USD}>USD</MenuItem>
-                        <MenuItem value={Currency.EUR}>EUR</MenuItem>
-                    </Select>
+    return (
+        <ThemeProvider theme={theme}>
+            <div className="App">
+                <div className="App-Canvas">
+                    <header>
+                        <NavBar className="App-NavBar"/>
+                    </header>
+                    <div className={"App-Content"}>
+                        <img src={logo} className="App-logo" alt="logo_rub"/>
+                        <Typography variant="h5" component="h5">
+                            Today is {moment().format(`ddd DD.MM.YYYY`)}
+                        </Typography>
+                        <MainInput
+                            startTime={startTime}
+                            perHour={perHour}
+                            onSetClick={(newStartTime, newPerHour) => {
+                                setStartTime(newStartTime);
+                                setPerHour(newPerHour);
+                            }}
+                            onResetClick={() => {
+                                setStartTime(null);
+                                setPerHour(null);
+                            }}
+                            currency={currency}
+                        />
+                        <br/>
+                        <Counter startTime={startTime} perHour={perHour} currency={currency}/>
+                        <div className="Bottom-Buttons">
+                            <Select
+                                size="small"
+                                id="change-currency"
+                                value={currency}
+                                label={"Change currency"}
+                                sx={{width: 100}}
+                                onChange={e => setCurrency(e.target.value)}
+                            >
+                                <MenuItem value={Currency.RUB}>RUB</MenuItem>
+                                <MenuItem value={Currency.USD}>USD</MenuItem>
+                                <MenuItem value={Currency.EUR}>EUR</MenuItem>
+                            </Select>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>;
+        </ThemeProvider>);
 }
 
 function MainInput(props) {
@@ -129,5 +131,13 @@ function MainInput(props) {
         </Grid>
     }
 }
+
+const theme = createTheme({
+    palette: {
+        primary: {
+            main: "#11BB88"
+        }
+    },
+});
 
 export default App;

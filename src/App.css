@@ -7,14 +7,14 @@
     text-align: center;
 }
 
-.App-Content {
+.App-Canvas {
     min-height: 100vh;
-    max-width: 120vh;
+    min-width: 100%;
 }
 
-.App-header {
-    min-height: 20vh;
-    height: 30vh;
+.App-NavBar {
+    min-height: 5vh;
+    height: 5vh;
     padding-top: 2.5vh;
     padding-bottom: 2.5vh;
     display: flex;
@@ -25,6 +25,10 @@
     color: #4f4e4e;
 }
 
+.App-Content {
+    margin: 1vh;
+}
+
 .App-link {
     color: #61dafb;
 }
@@ -32,6 +36,7 @@
 .App-logo {
     height: 30vh;
     width: 30vh;
+    margin: 2vh;
     pointer-events: none;
 }
 
