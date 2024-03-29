@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import moment from "moment"
-import {Typography} from "@mui/material";
+import { Typography } from "@mui/material";
 
-const Counter = ({startTime, perHour, currency}) => {
+const Counter = ({ startTime, perHour, currency }) => {
 
     const [amount, setAmount] = useState(0)
     const perSecond = perHour / 3600.0
@@ -23,7 +23,7 @@ const Counter = ({startTime, perHour, currency}) => {
 
     return <div className="Counter-Earned">
         <Typography variant="h4" component="h4">
-            Earned {amount.toFixed(2)} {currency.symbol}
+            Earned { amount.toFixed(2) } { currency.symbol }
         </Typography>
     </div>;
 }
