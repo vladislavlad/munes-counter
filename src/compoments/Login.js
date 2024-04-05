@@ -1,8 +1,9 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
-import { Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
+import TextField from "@mui/material/TextField";
 
 
 const Login = () => {
@@ -65,37 +66,56 @@ const Login = () => {
 
         <div>
             <p ref={ errRef } className={ errMsg ? "errmsg" : "offscreen" } aria-live="assertive">{ errMsg }</p>
-            <Typography variant="h4" component="h5">
-                Sign In
-            </Typography>
-            <form onSubmit={ handleSubmit }>
-                <label htmlFor="username">Username:</label>
-                <input
-                    type="text"
-                    id="username"
-                    ref={ userRef }
-                    autoComplete="off"
-                    onChange={ (e) => setUsername(e.target.value) }
-                    value={ username }
-                    required
-                />
-
-                <label htmlFor="password">Password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    onChange={ (e) => setPassword(e.target.value) }
-                    value={ password }
-                    required
-                />
-                <button>Sign In</button>
-            </form>
-            <p>
+            <Grid container style={ { gap: 18 } }>
+                <Grid item xs={ 12 }>
+                    <Typography variant="h4" component="h5">
+                        Sign In
+                    </Typography>
+                </Grid>
+                <Grid item xs={ 12 }>
+                    <TextField
+                        id="username"
+                        label={ "Username" }
+                        type="text"
+                        required
+                        autoComplete="off"
+                        ref={ userRef }
+                        value={ username }
+                        onChange={ e => {
+                            setUsername(e.target.value);
+                        } }
+                        sx={ { width: 300 } }
+                    />
+                </Grid>
+                <Grid item xs={ 12 }>
+                    <TextField
+                        id="password"
+                        label={ "Password" }
+                        type="password"
+                        required
+                        value={ password }
+                        onChange={ e => {
+                            setPassword(e.target.value);
+                        } }
+                        sx={ { width: 300 } }
+                    />
+                </Grid>
+                <Grid item xs={ 12 }>
+                    <Button
+                        variant="outlined"
+                        size="large"
+                        onClick={ handleSubmit }
+                        sx={ { width: 300 } }
+                    >
+                        Sign In
+                    </Button>
+                </Grid>
+            </Grid>
+            <div>
+                <br/>
                 Need an Account?<br/>
-                <span className="line">
-                    <Link to="/register">Sign Up</Link>
-                </span>
-            </p>
+                <Link to="/register">Sign Up</Link>
+            </div>
         </div>
 
     )
