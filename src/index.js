@@ -1,9 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from "react-dom/client"
 import './index.css';
 import App from './App';
 import { createTheme, ThemeProvider } from "@mui/material";
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { AuthProvider } from "./context/AuthProvider";
 
 const theme = createTheme({
@@ -14,17 +14,18 @@ const theme = createTheme({
     },
 });
 
-ReactDOM.render(
-    <React.StrictMode>
+createRoot(
+    document.getElementById('root')
+).render(
+    <React.Fragment>
         <BrowserRouter>
-            <AuthProvider>
-                <ThemeProvider theme={ theme }>
+            <ThemeProvider theme={ theme }>
+                <AuthProvider>
                     <Routes>
                         <Route path="/*" element={ <App/> }/>
                     </Routes>
-                </ThemeProvider>
-            </AuthProvider>
+                </AuthProvider>
+            </ThemeProvider>
         </BrowserRouter>
-    </React.StrictMode>,
-    document.getElementById('root')
+    </React.Fragment>
 );

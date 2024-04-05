@@ -6,7 +6,6 @@ import TextField from '@mui/material/TextField';
 import Counter from './Counter.js'
 import { Button, Grid, MenuItem, Select, Typography } from "@mui/material";
 import { Currency } from "./Currency";
-import { NavBar } from "./navbar/NavBar";
 
 function MainPage() {
 
@@ -15,45 +14,40 @@ function MainPage() {
     const [currency, setCurrency] = useState(() => Currency.RUB);
 
     return (
-        <div className="App">
-            <div className="App-Canvas">
-                <header>
-                    <NavBar className="App-NavBar"/>
-                </header>
-                <div className={ "App-Content" }>
-                    <img src={ logo } className="App-logo" alt="logo_rub"/>
-                    <Typography variant="h5" component="h5">
-                        Today is { moment().format(`ddd DD.MM.YYYY`) }
-                    </Typography>
-                    <MainInput
-                        startTime={ startTime }
-                        perHour={ perHour }
-                        onSetClick={ (newStartTime, newPerHour) => {
-                            setStartTime(newStartTime);
-                            setPerHour(newPerHour);
-                        } }
-                        onResetClick={ () => {
-                            setStartTime(null);
-                            setPerHour(null);
-                        } }
-                        currency={ currency }
-                    />
-                    <br/>
-                    <Counter startTime={ startTime } perHour={ perHour } currency={ currency }/>
-                    <div className="Bottom-Buttons">
-                        <Select
-                            size="small"
-                            id="change-currency"
-                            value={ currency }
-                            label={ "Change currency" }
-                            sx={ { width: 100 } }
-                            onChange={ e => setCurrency(e.target.value) }
-                        >
-                            <MenuItem value={ Currency.RUB }>RUB</MenuItem>
-                            <MenuItem value={ Currency.USD }>USD</MenuItem>
-                            <MenuItem value={ Currency.EUR }>EUR</MenuItem>
-                        </Select>
-                    </div>
+        <div>
+            <div className={ "App-Content" }>
+                <img src={ logo } className="App-logo" alt="logo_rub"/>
+                <Typography variant="h5" component="h5">
+                    Today is { moment().format(`ddd DD.MM.YYYY`) }
+                </Typography>
+                <MainInput
+                    startTime={ startTime }
+                    perHour={ perHour }
+                    onSetClick={ (newStartTime, newPerHour) => {
+                        setStartTime(newStartTime);
+                        setPerHour(newPerHour);
+                    } }
+                    onResetClick={ () => {
+                        setStartTime(null);
+                        setPerHour(null);
+                    } }
+                    currency={ currency }
+                />
+                <br/>
+                <Counter startTime={ startTime } perHour={ perHour } currency={ currency }/>
+                <div className="Bottom-Buttons">
+                    <Select
+                        size="small"
+                        id="change-currency"
+                        value={ currency }
+                        label={ "Change currency" }
+                        sx={ { width: 100 } }
+                        onChange={ e => setCurrency(e.target.value) }
+                    >
+                        <MenuItem value={ Currency.RUB }>RUB</MenuItem>
+                        <MenuItem value={ Currency.USD }>USD</MenuItem>
+                        <MenuItem value={ Currency.EUR }>EUR</MenuItem>
+                    </Select>
                 </div>
             </div>
         </div>

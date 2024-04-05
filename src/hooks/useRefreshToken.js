@@ -5,18 +5,33 @@ const useRefreshToken = () => {
     const { setAuth } = useAuth();
 
     return async () => {
-        const response = await axios.post(
-            '/authentication/refresh-token',
-            { refreshToken: localStorage.getItem('refreshToken') },
-            { withCredentials: true }
-        );
 
-        setAuth(prev => {
-            return { ...prev, accessToken: response.data.accessToken }
-        });
-        localStorage.setItem('refreshToken', response?.data?.refreshToken);
+        let refreshToken = localStorage.getItem('refreshToken');
+        console.log('REFRESH TOKEN', refreshToken)
 
-        return response.data.accessToken;
+        if (!refreshToken) {
+            console.log('REFRESH TOKEN is not set');
+            return Promise.reject()
+        }
+
+        try {
+            const response = await axios.post(
+                '/authentication/refresh-token',
+                { refreshToken: refreshToken },
+                { withCredentials: true }
+            );
+
+            setAuth(prev => {
+                return { ...prev, accessToken: response.data.accessToken }
+            });
+            localStorage.setItem('refreshToken', response?.data?.refreshToken);
+
+            console.log('REFRESH SUCCESS');
+            return Promise.resolve(response.data.accessToken);
+        } catch (error) {
+            console.log('REFRESH FAILURE');
+            return Promise.reject(error)
+        }
     };
 };
 
