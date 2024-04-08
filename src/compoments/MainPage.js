@@ -115,6 +115,7 @@ function MainInput(props) {
                 <Button
                     variant="outlined"
                     size="large"
+                    type="submit"
                     sx={ { width: 300 } }
                     onClick={ () => props.onSetClick(varStartTime, varPerHour) }
                 >

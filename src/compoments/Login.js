@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import axios from '../api/axios';
 import { Button, Grid, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
+import Divider from "@mui/material/Divider";
 
 const Login = () => {
     const { setAuth } = useAuth();
@@ -64,13 +65,14 @@ const Login = () => {
     return (
 
         <div>
-            <p ref={ errRef } className={ errMsg ? "errmsg" : "offscreen" } aria-live="assertive">{ errMsg }</p>
-            <Grid container style={ { gap: 18 } }>
+            <Grid component="form"  container style={ { gap: 18 } }>
+                <Divider></Divider>
                 <Grid item xs={ 12 }>
                     <Typography variant="h4" component="h5">
                         Sign In
                     </Typography>
                 </Grid>
+                <Divider></Divider>
                 <Grid item xs={ 12 }>
                     <TextField
                         id="username"
@@ -99,10 +101,18 @@ const Login = () => {
                         sx={ { width: 300 } }
                     />
                 </Grid>
+                <Grid item xs={ 12}>
+                    <Typography ref={ errRef }
+                                className={ errMsg ? "Error-Message" : "offscreen" }
+                                aria-live="assertive">
+                        { errMsg }
+                    </Typography>
+                </Grid>
                 <Grid item xs={ 12 }>
                     <Button
                         variant="outlined"
                         size="large"
+                        type="submit"
                         onClick={ handleSubmit }
                         sx={ { width: 300 } }
                     >
@@ -116,7 +126,6 @@ const Login = () => {
                 <Link to="/register">Sign Up</Link>
             </div>
         </div>
-
     )
 }
 

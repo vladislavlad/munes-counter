@@ -5,9 +5,7 @@ const useRefreshToken = () => {
     const { setAuth } = useAuth();
 
     return async () => {
-
         let refreshToken = localStorage.getItem('refreshToken');
-        console.log('REFRESH TOKEN', refreshToken)
 
         if (!refreshToken) {
             console.log('REFRESH TOKEN is not set');

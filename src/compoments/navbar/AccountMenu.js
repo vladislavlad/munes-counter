@@ -27,26 +27,17 @@ export default function AccountMenu() {
 
     useEffect(() => {
         const getUser = async () => {
-            try {
-                try {
-                    await axiosAuthed.get('/current-user')
-                        .then(
-                            response => {
-                                if (response?.data != null) {
-                                    setUser(response.data)
-                                }
-                            },
-                            () => {
-                                console.log('PROMISE ERROR in promise')
-                            }
-                        );
-                } catch (error) {
-                    setUser(null);
-                    console.log('PROMISE ERROR try catch')
-                }
-            } catch {
-                console.log('PROMISE ERROR 2')
-            }
+            await axiosAuthed.get('/current-user')
+                .then(
+                    response => {
+                        if (response?.data != null) {
+                            setUser(response.data)
+                        }
+                    },
+                    () => {
+                        console.log('ERROR in GET /current-user')
+                    }
+                );
         };
 
         getUser();
@@ -128,7 +119,7 @@ export default function AccountMenu() {
             >
                 <MenuItem onClick={ handleClose }>
                     <Avatar/>
-                    { user?.firstName }
+                    { user?.firstName ?? 'Anonymous' }
                 </MenuItem>
 
                 <Divider/>

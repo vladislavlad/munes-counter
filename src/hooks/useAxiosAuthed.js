@@ -28,16 +28,13 @@ const useAxiosAuthed = () => {
 
                 if (error?.response?.status === 401 && !originalRequestConfig?.isRetry) {
                     originalRequestConfig.isRetry = true;
-                    try {
-                        return refresh()
-                            .then(accessToken => {
-                                    originalRequestConfig.headers['Authorization'] = `Bearer ${ accessToken }`;
-                                    return axiosAuthed(originalRequestConfig)
-                                }
-                            )
-                    } catch {
-                        console.log('REFRESH ERROR', error)
-                    }
+
+                    return refresh()
+                        .then(accessToken => {
+                                originalRequestConfig.headers['Authorization'] = `Bearer ${ accessToken }`;
+                                return axiosAuthed(originalRequestConfig)
+                            }
+                        )
                 }
                 return Promise.reject();
             }
