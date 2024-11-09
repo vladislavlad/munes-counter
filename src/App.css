@@ -1,7 +1,7 @@
 .App {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: flex-start;*/
     align-items: center;
     background-color: #e9f3ff;
     text-align: center;
@@ -15,13 +15,13 @@
 .App-NavBar {
     min-height: 5vh;
     height: 5vh;
-    padding-top: 2.5vh;
-    padding-bottom: 2.5vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #4f4e4e;
+    /*padding-top: 2.5vh;*/
+    /*padding-bottom: 2.5vh;*/
+    /*display: flex;*/
+    /*flex-direction: column;*/
+    /*justify-content: center;*/
+    /*align-items: center;*/
+    /*color: #4f4e4e;*/
 }
 
 .App-Content {
@@ -40,7 +40,7 @@
 }
 
 .Bottom-Buttons {
-    padding-top: 1vh;
+    /*padding-top: 1vh;*/
 }
 
 .Error-Message {

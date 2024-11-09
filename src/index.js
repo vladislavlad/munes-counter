@@ -21,9 +21,11 @@ createRoot(
         <BrowserRouter>
             <ThemeProvider theme={ theme }>
                 <AuthProvider>
-                    <Routes>
-                        <Route path="/*" element={ <App/> }/>
-                    </Routes>
+                    <App/>
+                    {/*read doc !!!*/}
+                    {/*<Routes>*/}
+                    {/*    <Route path="/*" element={ <App/> }/>*/}
+                    {/*</Routes>*/}
                 </AuthProvider>
             </ThemeProvider>
         </BrowserRouter>
