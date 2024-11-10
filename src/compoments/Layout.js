@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom"
 import NavBar from "./navbar/NavBar";
 import React from "react";
+import ParticlesFooter from "./footer/ParticlesFooter";
 
 const Layout = () => {
 
@@ -9,6 +10,7 @@ const Layout = () => {
             <div className="App-Canvas">
                 <NavBar className="App-NavBar"/>
                 <Outlet/>
+                <ParticlesFooter/>
             </div>
         </main>
     )
