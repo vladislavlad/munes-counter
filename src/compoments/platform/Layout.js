@@ -2,8 +2,7 @@ import { Outlet } from "react-router-dom"
 import NavBar from "./navbar/NavBar";
 import React from "react";
 
-const Layout = () => {
-
+export default function Layout() {
     return (
         <main className="App">
             <div className="App-Canvas">
@@ -13,5 +12,3 @@ const Layout = () => {
         </main>
     )
 }
-
-export default Layout

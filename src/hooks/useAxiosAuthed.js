@@ -10,12 +10,13 @@ const useAxiosAuthed = () => {
     useEffect(() => {
 
         const requestIntercept = axiosAuthed.interceptors.request.use(
-            config => {
-                if (!config.headers['Authorization']) {
-                    config.headers['Authorization'] = `Bearer ${ auth?.accessToken }`;
+            requestConfig => {
+                if (!requestConfig.headers['Authorization']) {
+                    requestConfig.headers['Authorization'] = `Bearer ${ auth?.accessToken }`;
                 }
-                return config;
-            }, (error) => Promise.reject(error)
+                return requestConfig;
+            },
+            (error) => Promise.reject(error)
         );
 
         const responseIntercept = axiosAuthed.interceptors.response.use(
@@ -23,18 +24,17 @@ const useAxiosAuthed = () => {
             async (error) => {
                 const originalRequestConfig = error?.config;
 
-                console.log('AUTH AXIOS', auth)
-                console.log('IS RETRY', originalRequestConfig?.isRetry)
+                console.log('Request error. Current auth: ', auth)
+                console.log('Request error. Is retry: ', originalRequestConfig?.isRetry)
 
                 if (error?.response?.status === 401 && !originalRequestConfig?.isRetry) {
                     originalRequestConfig.isRetry = true;
 
                     return refresh()
                         .then(accessToken => {
-                                originalRequestConfig.headers['Authorization'] = `Bearer ${ accessToken }`;
-                                return axiosAuthed(originalRequestConfig)
-                            }
-                        )
+                            originalRequestConfig.headers['Authorization'] = `Bearer ${ accessToken }`;
+                            return axiosAuthed(originalRequestConfig)
+                        })
                 }
                 return Promise.reject();
             }

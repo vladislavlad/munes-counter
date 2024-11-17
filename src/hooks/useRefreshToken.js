@@ -1,14 +1,17 @@
 import axios from '../api/axios';
 import useAuth from './useAuth';
+import { useNavigate } from "react-router-dom";
 
 const useRefreshToken = () => {
     const { setAuth } = useAuth();
+    const navigate = useNavigate();
 
     return async () => {
         let refreshToken = localStorage.getItem('refreshToken');
 
         if (!refreshToken) {
             console.log('REFRESH TOKEN is not set');
+            navigate('/login');
             return Promise.reject()
         }
 
@@ -28,6 +31,7 @@ const useRefreshToken = () => {
             return Promise.resolve(response.data.accessToken);
         } catch (error) {
             console.log('REFRESH FAILURE');
+            navigate('/login');
             return Promise.reject(error)
         }
     };

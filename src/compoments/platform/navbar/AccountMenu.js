@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Avatar from '@mui/material/Avatar';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -10,12 +10,12 @@ import Tooltip from '@mui/material/Tooltip';
 import Settings from '@mui/icons-material/Settings';
 import Logout from '@mui/icons-material/Logout';
 import { useNavigate } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
-import useAxiosAuthed from "../../hooks/useAxiosAuthed";
+import useAxiosAuthed from "../../../hooks/useAxiosAuthed";
+import AuthContext from "../../../context/AuthProvider";
 
 export default function AccountMenu() {
 
-    const { auth, setAuth } = useAuth();
+    const { auth, setAuth } = useContext(AuthContext);
     const [user, setUser] = useState(null);
     const axiosAuthed = useAxiosAuthed();
     const navigate = useNavigate();
@@ -26,6 +26,8 @@ export default function AccountMenu() {
     console.log('USER', user)
 
     useEffect(() => {
+
+
         const getUser = async () => {
             await axiosAuthed.get('/current-user')
                 .then(
@@ -33,6 +35,7 @@ export default function AccountMenu() {
                         if (response?.data != null) {
                             setUser(response.data)
                         }
+                        return response.data
                     },
                     () => {
                         console.log('ERROR in GET /current-user')
@@ -41,15 +44,17 @@ export default function AccountMenu() {
         };
 
         getUser();
-    }, [auth, axiosAuthed]);
+    }, [auth, axiosAuthed, setUser]);
 
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
+
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     const handleLogout = () => {
         setAuth({});
         setUser({});
@@ -64,7 +69,7 @@ export default function AccountMenu() {
 
     return (
         <React.Fragment>
-            <Tooltip title="Account settings">
+            <Tooltip title="Account menu">
                 <IconButton
                     onClick={ handleClick }
                     size="small"
@@ -119,7 +124,7 @@ export default function AccountMenu() {
             >
                 <MenuItem onClick={ handleClose }>
                     <Avatar/>
-                    { user?.firstName ?? 'Anonymous' }
+                    { user?.firstName ?? 'Anonymous' } { user?.lastName ?? '' }
                 </MenuItem>
 
                 <Divider/>

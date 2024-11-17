@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client"
 import './index.css';
 import App from './App';
 import { createTheme, ThemeProvider } from "@mui/material";
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from "./context/AuthProvider";
 
 const theme = createTheme({
@@ -18,16 +18,12 @@ createRoot(
     document.getElementById('root')
 ).render(
     <React.Fragment>
-        <BrowserRouter>
-            <ThemeProvider theme={ theme }>
+        <ThemeProvider theme={ theme }>
+            <BrowserRouter>
                 <AuthProvider>
                     <App/>
-                    {/*read doc !!!*/}
-                    {/*<Routes>*/}
-                    {/*    <Route path="/*" element={ <App/> }/>*/}
-                    {/*</Routes>*/}
                 </AuthProvider>
-            </ThemeProvider>
-        </BrowserRouter>
+            </BrowserRouter>
+        </ThemeProvider>
     </React.Fragment>
 );

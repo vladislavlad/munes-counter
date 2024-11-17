@@ -1,16 +1,15 @@
 import './App.css'
 import { Route, Routes } from "react-router-dom";
 import MainPage from "./compoments/MainPage";
-import Login from "./compoments/Login";
-import NotFound from "./compoments/NotFound";
-import Layout from "./compoments/Layout";
+import Login from "./compoments/platform/Login";
+import NotFound from "./compoments/platform/NotFound";
+import Layout from "./compoments/platform/Layout";
 
 function App() {
 
     return (
         <Routes>
             <Route path="/" element={ <Layout/> }>
-                {/* public routes */ }
 
                 <Route path="/login" element={ <Login/> }/>
                 {/*<Route path="register" element={<Register />} />*/ }

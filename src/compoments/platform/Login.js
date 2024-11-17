@@ -1,12 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import useAuth from '../hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
+import axios from '../../api/axios';
 import { Button, Grid, Typography } from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 
-const Login = () => {
+export default function Login() {
     const { setAuth } = useAuth();
 
     const navigate = useNavigate();
@@ -65,7 +65,7 @@ const Login = () => {
     return (
 
         <div>
-            <Grid component="form"  container style={ { gap: 18 } }>
+            <Grid component="form" container style={ { gap: 18 } }>
                 <Divider></Divider>
                 <Grid item xs={ 12 }>
                     <Typography variant="h4" component="h5">
@@ -101,7 +101,7 @@ const Login = () => {
                         sx={ { width: 300 } }
                     />
                 </Grid>
-                <Grid item xs={ 12}>
+                <Grid item xs={ 12 }>
                     <Typography ref={ errRef }
                                 className={ errMsg ? "Error-Message" : "offscreen" }
                                 aria-live="assertive">
@@ -128,5 +128,3 @@ const Login = () => {
         </div>
     )
 }
-
-export default Login

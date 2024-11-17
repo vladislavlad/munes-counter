@@ -9,9 +9,7 @@ export default function NavBar() {
 
     const navigate = useNavigate();
 
-    function handleHome() {
-        navigate('/');
-    }
+    const handleHome = () => navigate('/')
 
     return (
         <AppBar position="static">

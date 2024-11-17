@@ -7,7 +7,7 @@ import Counter from './Counter.js'
 import { Button, Container, Grid, MenuItem, Select, Typography } from "@mui/material";
 import { Currency } from "./Currency";
 
-function MainPage() {
+export default function MainPage() {
 
     const [startTime, setStartTime] = useState(null);
     const [perHour, setPerHour] = useState(null);
@@ -146,5 +146,3 @@ function MainInput(props) {
         </Container>
     }
 }
-
-export default MainPage;
